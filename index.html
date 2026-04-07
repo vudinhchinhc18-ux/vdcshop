@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gia Phả Họ Vũ Đông Đông</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body { font-family: 'Roboto', system-ui, sans-serif; }
+        
+        .nav-link {
+            transition: all 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #fcd34d;
+            border-bottom: 3px solid #fcd34d;
+        }
+
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
+
+        .person {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .person:hover {
+            background: #fef3c7;
+            transform: translateY(-5px);
+        }
+        .person-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #b45309;
+        }
+
+        .member-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .member-card {
+            background: white;
+            padding: 28px 24px;
+            border-radius: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+        .member-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(234, 88, 12, 0.18);
+            border-color: #f59e0b;
+        }
+        .member-card h4 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #b45309;
+            margin-bottom: 8px;
+        }
+        .member-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: white;
+            max-width: 440px;
+            width: 90%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px -15px rgb(0 0 0 / 0.5);
+        }
+    </style>
+</head>
+<body class="bg-orange-50 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-orange-700 text-white py-5 shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <i class="fas fa-users text-4xl"></i>
+                <div>
+                    <h1 class="text-3xl font-bold">Gia Phả Họ Vũ</h1>
+                    <p class="text-orange-200 text-sm">Họ Vũ Đông</p>
+                </div>
+            </div>
+            
+            <nav class="flex gap-8 text-lg font-medium">
+                <a href="#" onclick="showSection('home')" class="nav-link active" id="nav-home">Trang chủ</a>
+                <a href="#" onclick="showSection('tree')" class="nav-link" id="nav-tree">Sơ đồ gia phả</a>
+                <a href="#" onclick="showSection('members')" class="nav-link" id="nav-members">Danh sách thành viên</a>
+                <a href="#" onclick="showSection('biography')" class="nav-link" id="nav-biography">Tiểu sử</a>
+                <a href="#" onclick="showSection('news')" class="nav-link" id="nav-news">Tin tức</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-6 py-12">
+
+        <!-- TRANG CHỦ -->
+        <div id="section-home" class="section active">
+            <div class="bg-white rounded-3xl shadow-2xl p-16 text-center">
+                <h2 class="text-5xl font-bold text-orange-800 mb-4">Chào mừng đến với</h2>
+                <h1 class="text-6xl font-bold text-orange-700 mb-8">Gia Phả Họ Vũ Đông</h1>
+                <p class="text-2xl text-gray-600 max-w-3xl mx-auto">
+                    Nơi lưu giữ truyền thống, kết nối các thế hệ và tôn vinh tiên tổ của dòng họ Vũ Đông.
+                </p>
+                <button onclick="showSection('tree')" 
+                        class="mt-12 bg-orange-600 hover:bg-orange-700 text-white px-12 py-5 rounded-2xl text-xl font-semibold inline-flex items-center gap-4">
+                    <i class="fas fa-sitemap text-2xl"></i>
+                    Xem sơ đồ gia phả
+                </button>
+            </div>
+        </div>
+
+        <!-- SƠ ĐỒ GIA PHẢ -->
+        <div id="section-tree" class="section">
+            <h3 class="text-3xl font-bold mb-12 text-center flex items-center justify-center gap-4">
+                <i class="fas fa-sitemap text-orange-600"></i> 
+                Sơ đồ Gia Phả (Thế hệ gần đây)
+            </h3>
+            <div class="space-y-24">
+                <div class="text-center">
+                    <div class="inline-block bg-orange-100 text-orange-800 px-8 py-3 rounded-2xl font-bold text-lg mb-6">Thế hệ 1 - Tổ tiên</div>
+                    <div class="person mx-auto" onclick="showDetail('dong')">
+                        <p class="person-name">Vũ Đình Đông</p>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <div class="inline-block bg-orange-100 text-orange-800 px-8 py-3 rounded-2xl font-bold text-lg mb-8">Thế hệ 2</div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-2xl mx-auto">
+                        <div class="person" onclick="showDetail('lan')">
+                            <p class="person-name">Vũ Thị Lan</p>
+                        </div>
+                        <div class="person" onclick="showDetail('hai')">
+                            <p class="person-name">Vũ Đình Hải</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <div class="inline-block bg-orange-100 text-orange-800 px-8 py-3 rounded-2xl font-bold text-lg mb-8">Thế hệ 3</div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-2xl mx-auto">
+                        <div class="person" onclick="showDetail('an')">
+                            <p class="person-name">Vũ Đình An</p>
+                        </div>
+                        <div class="person" onclick="showDetail('minh')">
+                            <p class="person-name">Vũ Thị Minh</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DANH SÁCH THÀNH VIÊN -->
+        <div id="section-members" class="section">
+            <h3 class="text-3xl font-bold mb-10 text-center">Danh sách thành viên</h3>
+            <div class="member-grid">
+                <div class="space-y-6">
+                    <div class="member-card" onclick="showDetail('dong')">
+                        <h4>Vũ Đình Đông</h4>
+                        <p class="text-orange-600">Thế hệ 1 • Tổ phụ</p>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div class="member-card" onclick="showDetail('lan')">
+                        <h4>Vũ Thị Lan</h4>
+                        <p class="text-orange-600">Thế hệ 2 • Con gái trưởng</p>
+                    </div>
+                    <div class="member-card" onclick="showDetail('hai')">
+                        <h4>Vũ Đình Hải</h4>
+                        <p class="text-orange-600">Thế hệ 2 • Con trai thứ</p>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div class="member-card" onclick="showDetail('an')">
+                        <h4>Vũ Đình An</h4>
+                        <p class="text-orange-600">Thế hệ 3 • Con trai</p>
+                    </div>
+                    <div class="member-card" onclick="showDetail('minh')">
+                        <h4>Vũ Thị Minh</h4>
+                        <p class="text-orange-600">Thế hệ 3 • Con gái</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TIỂU SỬ -->
+        <div id="section-biography" class="section">
+            <h3 class="text-3xl font-bold mb-10 text-center">Tiểu sử các thế hệ</h3>
+            <div class="max-w-4xl mx-auto space-y-12">
+                <div class="bg-white p-10 rounded-3xl shadow-lg">
+                    <h4 class="text-3xl font-bold text-orange-800 mb-4">Vũ Đình Đông (1920 - 1995)</h4>
+                    <p class="text-gray-700 leading-relaxed">
+                        Ông Vũ Đình Đông là tổ phụ của dòng họ Vũ Đông. Sinh năm 1920 tại vùng Đông, ông là người có công lớn trong việc xây dựng và phát triển gia tộc. 
+                        Với tinh thần cần cù, chịu khó và đức độ cao, ông đã để lại cho con cháu một nền tảng vững chắc về đạo đức, truyền thống và tinh thần đoàn kết.
+                    </p>
+                </div>
+
+                <div class="bg-white p-10 rounded-3xl shadow-lg">
+                    <h4 class="text-3xl font-bold text-orange-800 mb-4">Vũ Thị Lan (1952 - nay)</h4>
+                    <p class="text-gray-700 leading-relaxed">
+                        Bà Vũ Thị Lan là con gái trưởng của tổ phụ Vũ Đình Đông. Bà luôn là chỗ dựa tinh thần cho toàn thể gia đình. 
+                        Trong những năm tháng khó khăn, bà đã cùng anh em vượt qua thử thách, chăm lo cho con cháu và giữ gìn truyền thống dòng họ.
+                    </p>
+                </div>
+
+                <div class="bg-white p-10 rounded-3xl shadow-lg">
+                    <h4 class="text-3xl font-bold text-orange-800 mb-4">Vũ Đình Hải (1955 - nay)</h4>
+                    <p class="text-gray-700 leading-relaxed">
+                        Ông Vũ Đình Hải là con trai thứ của tổ phụ. Là trụ cột chính của gia đình, ông luôn nỗ lực giữ gìn và phát huy truyền thống dòng họ. 
+                        Ông là người tích cực tổ chức các buổi họp mặt gia tộc và cập nhật gia phả.
+                    </p>
+                </div>
+
+                <div class="bg-white p-10 rounded-3xl shadow-lg">
+                    <h4 class="text-3xl font-bold text-orange-800 mb-4">Vũ Đình An (1985 - nay)</h4>
+                    <p class="text-gray-700 leading-relaxed">
+                        Anh Vũ Đình An là con trai của ông Vũ Đình Hải. Anh hiện đang sinh sống và làm việc tại Hà Nội, tích cực tham gia các hoạt động của dòng họ.
+                    </p>
+                </div>
+
+                <div class="bg-white p-10 rounded-3xl shadow-lg">
+                    <h4 class="text-3xl font-bold text-orange-800 mb-4">Vũ Thị Minh (1988 - nay)</h4>
+                    <p class="text-gray-700 leading-relaxed">
+                        Chị Vũ Thị Minh là con gái của ông Vũ Đình Hải. Chị là giáo viên và luôn quan tâm đến việc lưu giữ, cập nhật gia phả dòng họ.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TIN TỨC -->
+        <div id="section-news" class="section">
+            <h3 class="text-3xl font-bold mb-10">Tin tức &amp; Sự kiện</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-white p-8 rounded-3xl shadow">
+                    <p class="text-orange-600 text-sm">03/04/2026</p>
+                    <h4 class="font-bold text-xl mt-2">Họp mặt dòng họ Vũ Đông năm 2026</h4>
+                    <p class="mt-4 text-gray-600">Dự kiến tổ chức tại quê hương. Toàn thể con cháu được mời tham gia.</p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow">
+                    <p class="text-orange-600 text-sm">15/03/2026</p>
+                    <h4 class="font-bold text-xl mt-2">Cập nhật gia phả thế hệ mới</h4>
+                    <p class="mt-4 text-gray-600">Đã bổ sung thông tin một số thành viên thuộc thế hệ 4.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <div class="bg-orange-700 text-white px-8 py-6 flex justify-between items-center">
+                <h3 id="modalName" class="text-2xl font-bold"></h3>
+                <button onclick="closeModal()" class="text-4xl leading-none hover:text-orange-200">×</button>
+            </div>
+            <div id="modalContent" class="p-8 space-y-6 text-gray-700"></div>
+            <div class="px-8 py-6 border-t text-right">
+                <button onclick="closeModal()" 
+                        class="px-10 py-3 bg-gray-100 hover:bg-gray-200 rounded-2xl font-medium">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-orange-900 text-orange-200 py-14 mt-24">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-xl">© 2026 Gia Phả Họ Vũ Đông</p>
+            <p class="text-sm mt-3">Được phát triển bởi con cháu Họ Vũ Đông với lòng kính trọng tiên tổ</p>
+        </div>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            // Ẩn tất cả các section
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+                section.style.display = 'none';
+            });
+
+            // Hiện section được click
+            const targetSection = document.getElementById(`section-${sectionId}`);
+            if (targetSection) {
+                targetSection.style.display = 'block';
+                targetSection.classList.add('active');
+            }
+
+            // Cập nhật trạng thái menu
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.id === `nav-${sectionId}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Dữ liệu cho modal
+        const members = {
+            dong: { name: "Vũ Đình Đông", birth: "1920 - 1995", role: "Tổ phụ", info: "Người sáng lập và đặt nền móng cho dòng họ Vũ Đông." },
+            lan: { name: "Vũ Thị Lan", birth: "1952", role: "Con gái trưởng", info: "Con gái trưởng của tổ phụ." },
+            hai: { name: "Vũ Đình Hải", birth: "1955", role: "Con trai thứ", info: "Trụ cột của gia đình." },
+            an: { name: "Vũ Đình An", birth: "1985", role: "Thế hệ 3", info: "Con trai của Vũ Đình Hải." },
+            minh: { name: "Vũ Thị Minh", birth: "1988", role: "Thế hệ 3", info: "Con gái của Vũ Đình Hải." }
+        };
+
+        function showDetail(id) {
+            const member = members[id];
+            if (!member) return;
+
+            document.getElementById('modalName').textContent = member.name;
+            document.getElementById('modalContent').innerHTML = `
+                <p><strong>Năm sinh:</strong> ${member.birth}</p>
+                <p><strong>Vai trò:</strong> ${member.role}</p>
+                <p class="pt-6 border-t leading-relaxed">${member.info}</p>
+            `;
+            document.getElementById('detailModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('detailModal').style.display = 'none';
+        }
+
+        // Đóng modal khi click ngoài
+        document.getElementById('detailModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // Mở Trang chủ khi load
+        window.onload = () => {
+            showSection('home');
+        };
+    </script>
+</body>
+</html>
